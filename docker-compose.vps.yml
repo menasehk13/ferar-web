@@ -6,10 +6,11 @@ services:
       NODE_ENV: production
     labels:
       - traefik.enable=true
+      - traefik.docker.network=traefik
       - traefik.http.routers.ferar-web.rule=Host(`ferar.tagcodi.com`)
       - traefik.http.routers.ferar-web.entrypoints=websecure
       - traefik.http.routers.ferar-web.tls=true
-      - traefik.http.routers.ferar-web.tls.certresolver=letsencrypt
+      - traefik.http.routers.ferar-web.tls.certresolver=myresolver
       - traefik.http.services.ferar-web.loadbalancer.server.port=3000
     networks:
       - traefik
