@@ -1,0 +1,19 @@
+services:
+  ferar-web:
+    image: ghcr.io/menasehk13/ferar-web:latest
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ferar-web.rule=Host(`ferar.tagcodi.com`)
+      - traefik.http.routers.ferar-web.entrypoints=websecure
+      - traefik.http.routers.ferar-web.tls=true
+      - traefik.http.routers.ferar-web.tls.certresolver=letsencrypt
+      - traefik.http.services.ferar-web.loadbalancer.server.port=3000
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
