@@ -9,12 +9,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Ferar — City Delivery Platform",
+  title: "Ferar — Ride with Confidence",
   description:
-    "Ferar connects customers, riders, and operators for fast city delivery, live tracking, wallet payments, and safer logistics.",
+    "Ferar connects riders and drivers for safe, fast, and affordable rides. Download the app today.",
   openGraph: {
-    title: "Ferar — City Delivery Platform",
-    description: "Fast city delivery, live tracking, and connected rider operations.",
+    title: "Ferar — Ride with Confidence",
+    description: "Safe, fast, and affordable rides at your fingertips.",
     type: "website",
   },
   icons: { icon: "/ferar-logo.png" },
