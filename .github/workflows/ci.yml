@@ -56,18 +56,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build & push image
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Build image
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
+          push: false
           tags: |
             ghcr.io/menasehk13/ferar-web:${{ steps.version.outputs.next }}
             ghcr.io/menasehk13/ferar-web:latest
 
       - name: Tag release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -75,7 +74,7 @@ jobs:
           git push origin ${{ steps.version.outputs.next }}
 
       - name: Deploy to VPS
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
